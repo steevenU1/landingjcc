@@ -378,3 +378,50 @@ body.no-scroll{
   .foot-logo-wrap{ width:34px; height:34px; border-radius:10px }
   .foot-logo-chip{ border-radius:8px }
 }
+
+/* ===== Contacto — Responsive ===== */
+
+/* asegura que ambas tarjetas crezcan parejo y no desborden */
+#contacto .grid-2{
+  grid-template-columns: 1fr 1fr; /* desktop */
+  gap: 22px;
+  align-items: start;
+}
+#contacto .card{ min-width: 0; } /* previene overflow de inputs/líneas largas */
+
+/* stack en una sola columna */
+@media (max-width: 1024px){
+  #contacto .grid-2{ grid-template-columns: 1fr; }
+}
+
+/* ajustes para móviles */
+@media (max-width: 640px){
+  #contacto .card{ padding:16px; }
+  #contacto .section-title{ font-size: clamp(1.6rem, 6vw, 2rem); }
+
+  /* mapa más alto y sin recortes */
+  #contacto .map-wrap{
+    height: 280px;          /* sube altura en móvil */
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  /* CTAs en columna y a todo el ancho */
+  #contacto .form-cta{
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  #contacto .form-cta .cta-primary,
+  #contacto .form-cta .cta-outline,
+  #contacto .form-cta button{
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* un pelín más de aire en pantallas muy pequeñas */
+@media (max-width: 380px){
+  #contacto .card{ padding:14px; }
+  #contacto .map-wrap{ height: 250px; }
+}
