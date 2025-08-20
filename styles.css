@@ -294,7 +294,7 @@ button{ cursor:pointer }
   height:36px;          
   width:auto;
   display:block;
-  border-radius:10px;   
+  /* border-radius:10px;    */
 }
 
 
