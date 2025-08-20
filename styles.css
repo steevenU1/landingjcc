@@ -279,7 +279,7 @@ button{ cursor:pointer }
 }
 
 /* ===================
-   Logos / prueba social (si se usa)
+   Logos / prueba social 
 =================== */
 .logos{ display:grid; grid-template-columns:repeat(6,1fr); gap:16px; align-items:center; opacity:.85 }
 .logos img{ filter:grayscale(100%); opacity:.8 }
@@ -287,4 +287,17 @@ button{ cursor:pointer }
 .copyright{
   margin-top:32px; font-size:.9rem; color:var(--muted);
   text-align:center; padding:16px 0;
+}
+
+/* Logo en navbar como imagen */
+.brand .logo-img{
+  height:36px;          
+  width:auto;
+  display:block;
+  border-radius:10px;   
+}
+
+
+@media (max-width:640px){
+  .brand .logo-img{ height:32px }
 }
