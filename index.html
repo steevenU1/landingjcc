@@ -12,7 +12,7 @@
       name="keywords"
       content="consultoría, ventas, desarrollo empresarial, Potenciar negocios, alto rendimiento, equipo comercial"
     />
-    <link rel="icon" href="./img/favicon.ico"/>
+    <link rel="icon" href="./img/favicon.ico" />
 
     <!-- Open Graph / Social -->
     <meta property="og:type" content="consultoria" />
@@ -55,14 +55,13 @@
         ]
       }
     </script>
-    
   </head>
   <body>
     <!-- ===== NAVBAR ===== -->
     <nav class="nav">
       <div class="container nav-inner">
         <a href="/" class="brand">
-          <img src="./img/logojcclatinobig.png" alt="JCC" class="logo-img" />
+          <img src="./img/jcc_consultoria.png" alt="JCC" class="logo-img" />
           <span>JCC Latino</span>
         </a>
         <button
@@ -122,15 +121,15 @@
         <div class="hero-art">
           <div class="hero-card" style="padding: 24px">
             <p>
-              <strong>JCC Latino</strong> es una metodología propietaria y
-              probada, diseñada para desbloquear el máximo potencial de tus
-              equipos de ventas.
+              <span class="brand-ink">JCC Latino</span> es una metodología
+              propietaria y probada, diseñada para desbloquear el máximo
+              potencial de tus equipos de ventas.
             </p>
             <p>
               A diferencia de otros enfoques,
-              <strong>“JCC Latino”</strong> va más allá de las técnicas de
-              venta, profundizando en la esencia de lo que impulsa a cada
-              individuo.
+              <span class="brand-ink">"JCC Latino"</span> va más allá de las
+              técnicas de venta, profundizando en la esencia de lo que impulsa a
+              cada individuo.
             </p>
           </div>
           <div class="glow" aria-hidden="true"></div>
@@ -153,9 +152,10 @@
           <p>
             El balance en todas las áreas de la vida nos lleva a mejorar el
             desempeño y generar compromiso y pertenencia; en el modelo de
-            Gestión Comercial <strong>JCC Latino</strong>, aseguramos que todos
-            los integrantes vivan la cultura y valores con el objetivo de
-            alinear, empoderar y comprometer el crecimiento de todos.
+            Gestión Comercial <span class="brand-ink">JCC Latino</span>,
+            aseguramos que todos los integrantes vivan la cultura y valores con
+            el objetivo de alinear, empoderar y comprometer el crecimiento de
+            todos.
           </p>
 
           <p class="strong">
@@ -410,7 +410,7 @@
               <span class="foot-logo-wrap">
                 <span class="foot-logo-chip">
                   <img
-                    src="./img/logojcclatinolit.png"
+                    src="./img/jcc_consultoria.png"
                     alt="JCC Latino"
                     class="foot-logo-img"
                   />
@@ -532,30 +532,38 @@
     </footer>
 
     <!-- ===== PANEL MÓVIL ===== -->
-    <div
+    <div class="mobile-overlay" id="mobileOverlay" hidden></div>
+
+    <nav
       class="mobile-panel"
       id="mobilePanel"
       role="dialog"
       aria-modal="true"
       aria-labelledby="menuMovilTitle"
     >
-      <div class="container" style="padding: 0">
+      <div class="mobile-head">
         <strong id="menuMovilTitle">Menú</strong>
-        <a href="#bases">Bases</a>
-        <a href="#pasos">Precios</a>
-        <a href="#contacto">Contacto</a>
-        <div class="mobile-cta">
-          <!-- <a class="cta-outline" href="#demo">Ver demo</a> -->
-          <a
-            class="cta-primary"
-            href="https://wa.me/61899363921?text=Hola%20me%20interesa%20su%20servicio"
-            target="_blank"
-            rel="noopener"
-            >WhatsApp</a
-          >
-        </div>
+        <button class="mobile-close" id="btnClose" aria-label="Cerrar menú">
+          ✕
+        </button>
       </div>
-    </div>
+
+      <div class="mobile-links">
+        <a href="#base-cl">Bases</a>
+        <a href="#ocho-ejes">Ejes JCC</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+
+      <div class="mobile-cta">
+        <a
+          class="cta-primary btn-lg"
+          href="https://wa.me/61899363921?text=Hola%20me%20interesa%20su%20servicio"
+          target="_blank"
+          rel="noopener"
+          >WhatsApp</a
+        >
+      </div>
+    </nav>
 
     <!-- Scripts -->
     <script src="script.js"></script>

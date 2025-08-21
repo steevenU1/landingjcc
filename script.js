@@ -4,35 +4,51 @@
   if (y) y.textContent = String(new Date().getFullYear());
 })();
 
-// ===== Menú móvil =====
+// ===== Menú móvil (limpio) =====
 (function () {
   var btn = document.getElementById("btnHamb");
   var panel = document.getElementById("mobilePanel");
-  if (!btn || !panel) return;
+  var closeBtn = document.getElementById("btnClose");
+  var overlay = document.getElementById("mobileOverlay");
 
-  function setOpen(open) {
-    if (open) panel.classList.add("open");
-    else panel.classList.remove("open");
-    btn.setAttribute("aria-expanded", open ? "true" : "false");
-    document.body.classList.toggle("no-scroll", open);
-    document.documentElement.classList.toggle("no-scroll", open);
+  if (!btn || !panel || !overlay) return;
+
+  function openPanel() {
+    panel.classList.add("open");
+    overlay.hidden = false;
+    document.body.classList.add("no-scroll");
+    btn.setAttribute("aria-expanded", "true");
+    // foco accesible
+    (closeBtn || panel).focus?.();
   }
-  function toggle() { setOpen(!panel.classList.contains("open")); }
 
-  btn.addEventListener("click", function (e) {
-    e.preventDefault();
-    e.stopPropagation();
-    toggle();
-  });
+  function closePanel() {
+    panel.classList.remove("open");
+    overlay.hidden = true;
+    document.body.classList.remove("no-scroll");
+    btn.setAttribute("aria-expanded", "false");
+    btn.focus?.();
+  }
 
-  // Cierra al tocar un enlace dentro del panel
-  panel.addEventListener("click", function (e) {
-    if (e.target && e.target.closest && e.target.closest("a")) setOpen(false);
-  });
+  function togglePanel() {
+    if (panel.classList.contains("open")) closePanel();
+    else openPanel();
+  }
 
-  // Cierra con ESC
+  // Abrir/cerrar
+  btn.addEventListener("click", function (e) { e.preventDefault(); togglePanel(); });
+  closeBtn?.addEventListener("click", function () { closePanel(); });
+  overlay.addEventListener("click", function () { closePanel(); });
+
+  // Cerrar con ESC
   document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && panel.classList.contains("open")) setOpen(false);
+    if (e.key === "Escape" && panel.classList.contains("open")) closePanel();
+  });
+
+  // Cerrar al pulsar un link del panel
+  panel.addEventListener("click", function (e) {
+    var a = e.target.closest("a"); if (!a) return;
+    closePanel();
   });
 })();
 
@@ -129,3 +145,4 @@
   var els = document.querySelectorAll(".feat, .testi, .plan, .card, .axis-card");
   for (var j = 0; j < els.length; j++) io.observe(els[j]);
 })();
+
