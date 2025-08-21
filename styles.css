@@ -32,8 +32,6 @@
   --danger:#ff5436;
 }
 
-/* Forzamos light (ignoramos prefers-color-scheme) */
-@media (prefers-color-scheme: dark){ :root{} }
 
 *{ box-sizing:border-box }
 html,body{ height:100% }
@@ -458,3 +456,143 @@ body.no-scroll{ overflow:hidden; touch-action:none; }
 .mobile-panel.open{ display:block; opacity:1; transform:none }
 
 .mobile-panel{ border-top: 4px solid var(--jcc-yellow); }
+
+/* ===== DESCUBRE — Texto amplio + Galería ===== */
+.descubre{
+  position: relative;
+  padding: 56px 0 64px;
+  background: var(--bg);
+}
+
+.descubre-head{
+  max-width: 940px;
+  margin: 0 auto 18px;
+  text-align: center;
+}
+.descubre .section-title{
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+.descubre .section-sub{
+  font-size: clamp(1rem, 1.2vw, 1.08rem);
+  color: var(--muted);
+  margin: 0 auto 18px;
+}
+
+/* línea de marca arriba (sutil) */
+.descubre::before{
+  content:"";
+  position:absolute; left:0; right:0; top:0; height:4px;
+  background: linear-gradient(90deg, var(--jcc-yellow), var(--jcc-orange));
+  opacity:.9;
+}
+
+/* Galería 3 */
+.gallery-3{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 18px;
+}
+.gallery-item{
+  background:#fff;
+  border: var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.gallery-item:hover{
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+  border: var(--border-strong);
+}
+.gallery-item img{
+  width: 100%; height: auto; display:block;
+  aspect-ratio: 16 / 10; object-fit: cover;
+  transition: transform .35s ease;
+}
+.gallery-item:hover img{ transform: scale(1.03) }
+
+.gallery-item figcaption{
+  padding: 12px 14px;
+  font-weight: 800;
+  color: var(--text);
+  border-top: var(--border);
+}
+
+/* Responsive */
+@media (max-width: 900px){
+  .gallery-3{ grid-template-columns: 1fr 1fr }
+}
+@media (max-width: 640px){
+  .gallery-3{ grid-template-columns: 1fr }
+}
+
+.descubre .section-title {
+  font-size: clamp(2rem, 3vw, 2.6rem);
+  font-weight: 900;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.descubre .section-title::after {
+  content: "";
+  display: block;
+  width: 90px;
+  height: 5px;
+  margin: 12px auto 0;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--jcc-blue), var(--jcc-orange));
+}
+
+.full-image {
+  margin: 60px auto;
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+}
+
+.full-image img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.85);
+  transition: transform 0.5s ease;
+}
+
+.full-image:hover img {
+  transform: scale(1.03);
+}
+
+.image-overlay {
+  position: relative;
+}
+
+.image-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  color: #fff;
+  background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.6) 100%);
+}
+
+.image-text h2 {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.image-text p {
+  font-size: 1.2rem;
+  max-width: 700px;
+}

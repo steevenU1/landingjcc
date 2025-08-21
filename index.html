@@ -12,7 +12,7 @@
       name="keywords"
       content="consultoría, ventas, desarrollo empresarial, Potenciar negocios, alto rendimiento, equipo comercial"
     />
-    <link rel="icon" href="./img/favicon.ico" />
+    <link rel="icon" href="./img/favicon.png" />
 
     <!-- Open Graph / Social -->
     <meta property="og:type" content="consultoria" />
@@ -29,6 +29,10 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     />
 
     <!-- Estilos -->
@@ -137,6 +141,49 @@
       </div>
     </header>
 
+    <!-- ===== DESCUBRE — Texto amplio + Galería ===== -->
+    <section id="descubre" class="descubre">
+      <div class="container">
+        <div class="descubre-head">
+          <h2 class="section-title">
+            Descubre el verdadero potencial del equipo
+          </h2>
+          <p class="section-sub">
+            Nuestro entorno abarca no solo los espacios que habitamos, también las personas que nos rodean y lo que consumimos. <br>Podemos distinguir el entorno en tres dimensiones: el relacional (familia, amigos, compañeros de trabajo, vecinos y comunidad); el físico (espacios donde vivimos y trabajamos); y el intelectual (lo que ves, lees y escuchas).
+          </p>
+        </div>
+
+        <div class="gallery-3">
+          <figure class="gallery-item">
+            <img
+              src="./img/13648.jpg"
+              alt="Workshop de ventas con equipo enfocado en objetivos"
+              loading="lazy"
+            />
+            <figcaption>Un entorno constructivo no es algo que se encuentra por casualidad ni un lujo: se diseña con intención y propósito.</figcaption>
+          </figure>
+
+          <figure class="gallery-item">
+            <img
+              src="./img/2825.jpg"
+              alt="Tableros con indicadores comerciales en tiempo real"
+              loading="lazy"
+            />
+            <figcaption>El primer paso para optimizar tu entorno es identificar qué te beneficia y qué te resta.</figcaption>
+          </figure>
+
+          <figure class="gallery-item">
+            <img
+              src="./img/2149362920.jpg"
+              alt="Cierre de ventas con acompañamiento y procesos"
+              loading="lazy"
+            />
+            <figcaption>El entorno no solo influye en lo que somos, también define lo que  podemos llegar a ser  - Deepak Chopra</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
     <!-- ===== 01 · BASE FUNDAMENTAL CÍRCULO LÍDER ===== -->
     <section id="base-cl">
       <div class="container card">
@@ -167,8 +214,7 @@
 
         <!-- Placeholder para logo o texto personalizado -->
         <div class="base-logo">
-          <img src="./img/logojcclatinolit.png" alt="Logo JCC" />
-          <!-- Si prefieres solo texto, reemplaza la imagen por un <h3> o <p> -->
+          <img src="./img/jcc_consultoria-horizontal@2x.png" alt="Logo JCC" />
         </div>
       </div>
     </section>
@@ -312,6 +358,18 @@
       </div>
     </section>
 
+    <section class="full-image">
+      <div class="image-overlay">
+        <img src="img/13648.jpg" alt="Equipo trabajando junto" />
+        <div class="image-text">
+          <h2>Nuestro entorno abarca no solo los espacios que habitamos, también las personas que nos rodean y lo que consumimos</h2>
+          <p>
+            Podemos distinguir el entorno en tres dimensiones: el relacional (familia, amigos, compañeros de trabajo, vecinos y comunidad); el físico (espacios donde vivimos y trabajamos); y el intelectual (lo que ves, lees y escuchas).
+          </p>
+        </div>
+      </div>
+    </section>
+
     <!-- ===== CONTACTO / LEAD FORM ===== -->
     <section id="contacto">
       <div class="container">
@@ -321,9 +379,11 @@
             <p class="muted">
               Contáctanos y descubre cómo podemos potenciar tu equipo de ventas
             </p>
+
+            <!-- FORMULARIO -->
             <form
               id="leadForm"
-              action="https://formspree.io/f/tu-endpoint"
+              action="https://formspree.io/f/mrblnbep"
               method="POST"
             >
               <div class="grid-2">
@@ -359,6 +419,16 @@
                   placeholder="Cuéntanos qué necesitas"
                 ></textarea>
               </label>
+
+              <!-- Honeypot anti-bots (opcional) -->
+              <input
+                type="text"
+                name="_gotcha"
+                tabindex="-1"
+                autocomplete="off"
+                style="display: none"
+              />
+
               <div class="form-cta">
                 <button type="submit" class="cta-primary">Enviar</button>
                 <a
@@ -373,8 +443,17 @@
                   >Al enviar aceptas nuestro aviso de privacidad.</span
                 >
               </div>
+
+              <!-- Mensaje de estado (éxito / error) -->
+              <div
+                id="formStatus"
+                class="form-status"
+                role="status"
+                aria-live="polite"
+              ></div>
             </form>
           </div>
+
           <div class="card">
             <strong>Datos de contacto</strong>
             <p class="muted">San Diego, California</p>
@@ -426,16 +505,8 @@
               <div>San Diego, California</div>
             </div>
 
-            <!-- <div class="foot-block">
-              <strong class="muted">MÉXICO</strong>
-              <div>Blvrd Toluca Metepec</div>
-              <div>Manzana 010, La Michoacana, 52166</div>
-              <div>San Jorge Pueblo Nuevo, Metepec, México</div>
-            </div> -->
-
             <div class="flags" aria-hidden="true">
               <span class="flag">🇺🇸</span>
-              <!-- <span class="flag">🇲🇽</span> -->
             </div>
           </div>
 
@@ -450,77 +521,25 @@
           <!-- Col 3: Síguenos -->
           <div class="foot-col">
             <h4 class="foot-title">Síguenos</h4>
-            <div class="socials">
-              <!-- TikTok -->
-              <a
-                class="social"
-                href="#"
-                aria-label="TikTok"
-                target="_blank"
-                rel="noopener"
-              >
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path
-                    d="M14.5 3v4.2c1.2 1 2.6 1.6 4 1.7v3.2c-1.7 0-3.2-.5-4-.9v3.8c0 3-2.4 5.5-5.5 5.5S3.5 18 3.5 15s2.5-5.5 5.5-5.5c.3 0 .6 0 .9.1V12c-.3-.1-.6-.1-.9-.1-1.4 0-2.5 1.1-2.5 2.5S7.6 17 9 17s2.5-1.1 2.5-2.5V3h3z"
-                  />
-                </svg>
-              </a>
-              <!-- Instagram -->
-              <a
-                class="social"
-                href="#"
-                aria-label="Instagram"
-                target="_blank"
-                rel="noopener"
-              >
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <rect x="3" y="3" width="18" height="18" rx="5" ry="5"></rect>
-                  <circle cx="12" cy="12" r="4.5"></circle>
-                  <circle cx="17.5" cy="6.5" r="1.3"></circle>
-                </svg>
-              </a>
-              <!-- Facebook -->
-              <a
-                class="social"
-                href="#"
-                aria-label="Facebook"
-                target="_blank"
-                rel="noopener"
-              >
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path
-                    d="M22 12a10 10 0 1 0-11.6 9.9v-7H8v-3h2.4V9.4c0-2.2 1.3-3.4 3.3-3.4.9 0 1.9.2 1.9.2v2.2h-1.1c-1.1 0-1.5.7-1.5 1.4V12H18l-.4 3h-2.6v7A10 10 0 0 0 22 12z"
-                  />
-                </svg>
-              </a>
-              <!-- X (Twitter) -->
-              <a
-                class="social"
-                href="#"
-                aria-label="X"
-                target="_blank"
-                rel="noopener"
-              >
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path
-                    d="M3 3h4.6l5 6.9L18.6 3H21l-7 8.6L21 21h-4.6l-5.4-7.4L5.4 21H3l7.3-8.9L3 3z"
-                  />
-                </svg>
-              </a>
-              <!-- LinkedIn -->
-              <a
-                class="social"
-                href="#"
-                aria-label="LinkedIn"
-                target="_blank"
-                rel="noopener"
-              >
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path
-                    d="M4.98 3.5a2.25 2.25 0 1 1 0 4.5 2.25 2.25 0 0 1 0-4.5zM3.5 9h3v12h-3V9zm6 0h2.9v1.6h.1c.4-.8 1.5-1.7 3.1-1.7 3.3 0 3.9 2.1 3.9 4.8V21h-3v-5.7c0-1.4 0-3.1-1.9-3.1s-2.2 1.5-2.2 3V21h-3V9z"
-                  />
-                </svg>
-              </a>
+            <div class="social-links">
+              <a href="#" aria-label="TikTok"
+                ><i class="fa-brands fa-tiktok"></i
+              ></a>
+              <a href="#" aria-label="Instagram"
+                ><i class="fa-brands fa-instagram"></i
+              ></a>
+              <a href="#" aria-label="Facebook"
+                ><i class="fa-brands fa-facebook-f"></i
+              ></a>
+              <a href="#" aria-label="X (Twitter)"
+                ><i class="fa-brands fa-x-twitter"></i
+              ></a>
+              <a href="#" aria-label="LinkedIn"
+                ><i class="fa-brands fa-linkedin-in"></i
+              ></a>
+              <a href="#" aria-label="YouTube"
+                ><i class="fa-brands fa-youtube"></i
+              ></a>
             </div>
           </div>
         </div>

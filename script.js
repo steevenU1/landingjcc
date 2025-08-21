@@ -4,7 +4,9 @@
   if (y) y.textContent = String(new Date().getFullYear());
 })();
 
-// ===== Menú móvil (limpio) =====
+/* ======================================================================
+   Menú móvil (accesible)
+====================================================================== */
 (function () {
   var btn = document.getElementById("btnHamb");
   var panel = document.getElementById("mobilePanel");
@@ -18,7 +20,6 @@
     overlay.hidden = false;
     document.body.classList.add("no-scroll");
     btn.setAttribute("aria-expanded", "true");
-    // foco accesible
     (closeBtn || panel).focus?.();
   }
 
@@ -35,24 +36,23 @@
     else openPanel();
   }
 
-  // Abrir/cerrar
   btn.addEventListener("click", function (e) { e.preventDefault(); togglePanel(); });
   closeBtn?.addEventListener("click", function () { closePanel(); });
   overlay.addEventListener("click", function () { closePanel(); });
 
-  // Cerrar con ESC
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && panel.classList.contains("open")) closePanel();
   });
 
-  // Cerrar al pulsar un link del panel
   panel.addEventListener("click", function (e) {
     var a = e.target.closest("a"); if (!a) return;
     closePanel();
   });
 })();
 
-// ===== FAQ acordeón =====
+/* ======================================================================
+   FAQ acordeón
+====================================================================== */
 (function () {
   var items = document.querySelectorAll(".faq-item");
   for (var i = 0; i < items.length; i++) {
@@ -65,7 +65,9 @@
   }
 })();
 
-// ===== Scroll suave =====
+/* ======================================================================
+   Scroll suave
+====================================================================== */
 (function () {
   var anchors = document.querySelectorAll('a[href^="#"]');
   for (var i = 0; i < anchors.length; i++) {
@@ -82,48 +84,101 @@
   }
 })();
 
-// ===== WhatsApp auto-msg =====
+/* ======================================================================
+   WhatsApp auto-msg + Envío AJAX a Formspree (sin redirección)
+====================================================================== */
 (function () {
   var form = document.getElementById("leadForm");
   var wa = document.getElementById("ctaWhats");
-  var waBase = "https://wa.me/5215555555555?text="; // <-- cambia a tu número real
+  var statusEl = document.getElementById("formStatus");
+
+  // ⚠️ Cambia a tu número real (formato wa.me sin +)
+  // Ejemplo MX: 52155XXXXXXXX   | Ejemplo US: 1XXXXXXXXXX
+  var waBase = "https://wa.me/5215555555555?text=";
 
   function val(name) {
     var el = form && form.elements ? form.elements[name] : null;
     return el && typeof el.value === "string" ? el.value.trim() : "";
   }
+
   function buildMsg() {
     var n = val("nombre");
     var t = val("telefono");
     var e = val("email");
     var m = val("mensaje");
-    return waBase + encodeURIComponent(
-      "Hola, soy " + n + ". Mi tel " + t + ". Mi correo " + e + ". Quiero info: " + m
-    );
+    var texto = "Hola, soy " + n + ". Mi tel " + t + ". Mi correo " + e + ". Quiero info: " + m;
+    return waBase + encodeURIComponent(texto);
   }
-  function updateWA() { if (wa) wa.setAttribute("href", buildMsg()); }
 
-  if (form && wa) {
+  function updateWA() {
+    if (wa) wa.setAttribute("href", buildMsg());
+  }
+
+  function setStatus(msg, type) {
+    if (!statusEl) return;
+    statusEl.textContent = msg || "";
+    statusEl.className = "form-status" + (type ? " " + type : "");
+    // Accesibilidad: anunciar cambios a lectores de pantalla
+    statusEl.setAttribute("aria-live", "polite");
+  }
+
+  if (!form) return;
+
+  // Actualiza el enlace de WhatsApp con los datos del formulario
+  if (wa) {
     form.addEventListener("input", updateWA);
     form.addEventListener("change", updateWA);
     updateWA();
   }
 
-  // Validación simple
-  if (form) {
-    form.addEventListener("submit", function (e) {
-      var telInput = form.elements ? form.elements["telefono"] : null;
-      var tel = telInput && telInput.value ? String(telInput.value).trim() : "";
-      var regex = /^\+?52?\s?\d{10}$/;
-      if (!regex.test(tel)) {
-        e.preventDefault();
-        alert("Por favor ingresa un número válido de 10 dígitos (ej. 5512345678).");
+  // Submit con fetch hacia Formspree (no redirección)
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    // Validación de teléfono (10 dígitos mexicanos, con o sin +52)
+    var telInput = form.elements["telefono"];
+    var tel = telInput && telInput.value ? String(telInput.value).trim() : "";
+    var regex = /^\+?52?\s?\d{10}$/;
+    if (!regex.test(tel)) {
+      setStatus("Por favor ingresa un número válido de 10 dígitos (ej. 5512345678).", "error");
+      telInput && telInput.focus();
+      return;
+    }
+
+    // Evitar doble envío
+    var submitBtn = form.querySelector('button[type="submit"]');
+    var originalText = submitBtn ? submitBtn.textContent : null;
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Enviando…"; }
+    setStatus("Enviando…");
+
+    try {
+      var res = await fetch(form.action, {
+        method: "POST",
+        headers: { "Accept": "application/json" },
+        body: new FormData(form)
+      });
+
+      if (res.ok) {
+        form.reset();
+        updateWA();
+        setStatus("Recibimos tus datos, estaremos en contacto contigo pronto", "ok");
+      } else {
+        var data = await res.json().catch(function(){ return {}; });
+        var msg = (data && data.errors && data.errors.map(function(e){ return e.message; }).join(", "))
+                  || "No se pudo enviar el formulario. Intenta de nuevo.";
+        setStatus(msg, "error");
       }
-    });
-  }
+    } catch (err) {
+      setStatus("Hubo un error de conexión. Inténtalo más tarde.", "error");
+    } finally {
+      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = originalText; }
+    }
+  });
 })();
 
-// ===== Aparición con IO =====
+/* ======================================================================
+   Aparición con IntersectionObserver
+====================================================================== */
 (function () {
   if (!("IntersectionObserver" in window)) return;
   var io = new IntersectionObserver(function (entries) {
